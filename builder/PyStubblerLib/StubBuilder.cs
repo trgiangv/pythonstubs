@@ -34,9 +34,12 @@ public static class StubBuilder
                 var paramComments = new Dictionary<string, string>();
                 foreach (var param in member.Elements("param"))
                 {
-                    string paramName = param.Attribute("name").Value;
-                    string paramDescription = param.Value.Trim();
-                    paramComments[paramName] = paramDescription;
+                    string paramName = param.Attribute("name")?.Value;
+                    if (paramName != null)
+                    {
+                        string paramDescription = param.Value.Trim();
+                        paramComments[paramName] = paramDescription;
+                    }
                 }
                 if (paramComments.Count > 0)
                 {
